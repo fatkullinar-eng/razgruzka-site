@@ -7,6 +7,7 @@
 - Сайт: https://fatkullinar-eng.github.io/razgruzka-site/
 - Репозиторий: https://github.com/fatkullinar-eng/razgruzka-site
 - Хостинг: GitHub Pages, ветка `main`, папка `/`.
+- Форма записи отключена до подключения Supabase: на сайте показывается телефон, а не ложное «заявка сохранена».
 
 ## Быстрый старт
 
