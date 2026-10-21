@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 
-Sitemap: https://razgruzka-msk.ru/sitemap.xml
+Sitemap: https://fatkullinar-eng.github.io/razgruzka-site/sitemap.xml

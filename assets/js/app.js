@@ -9,6 +9,10 @@
   var DEMO_KEY = "razgruzka_demo_bookings";
   var client = null;
   var isConfigured = Boolean(CONFIG.supabaseUrl && CONFIG.supabaseAnonKey);
+  var isLocal =
+    location.hostname === "localhost" ||
+    location.hostname === "127.0.0.1" ||
+    location.protocol === "file:";
 
   document.documentElement.classList.add("js-ready");
 
@@ -255,6 +259,12 @@
     status.className = "form-status field--full is-visible " + (type === "error" ? "is-error" : "is-success");
   }
 
+  function getPhoneText() {
+    var el = document.querySelector('[data-content="phone_display"]');
+    var text = el ? el.textContent.trim() : "";
+    return text || "+7 (999) 123-45-67";
+  }
+
   function clearInvalid() {
     form.querySelectorAll(".invalid").forEach(function (el) {
       el.classList.remove("invalid");
@@ -329,13 +339,20 @@
           var result = await client.from("bookings").insert(payload);
           if (result.error) throw result.error;
           setStatus("Спасибо! Заявка отправлена. Перезвоним в течение 15 минут с 10:00 до 22:00.", "success");
-        } else {
+        } else if (isLocal) {
           payload.id = "demo-" + Date.now();
           payload.created_at = new Date().toISOString();
           saveDemoBooking(payload);
           setStatus(
             "Демо-режим: заявка сохранена в этом браузере. После подключения Supabase она будет уходить в базу, а вы увидите её в личном кабинете.",
             "success"
+          );
+        } else {
+          setStatus(
+            "Онлайн-запись пока не подключена. Позвоните нам: " +
+              getPhoneText() +
+              " или напишите в мессенджер — запишем вручную.",
+            "error"
           );
         }
         form.reset();
@@ -378,6 +395,22 @@
       renderGallery(mapped);
     } catch (error) {
       console.warn("Демо-галерея не загрузилась:", error);
+    }
+  }
+
+  if (form && !client && !isLocal) {
+    var notice = document.createElement("p");
+    notice.className = "form-status field--full is-visible is-error";
+    notice.textContent =
+      "Онлайн-запись пока не подключена. Позвоните: " +
+      getPhoneText() +
+      " или напишите в мессенджер.";
+    form.prepend(notice);
+
+    var submitButton = form.querySelector('button[type="submit"]');
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = "Позвоните нам";
     }
   }
 

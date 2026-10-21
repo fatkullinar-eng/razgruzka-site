@@ -2,6 +2,12 @@
 
 Одностраничный сайт и личный кабинет владельца.
 
+## Публикация
+
+- Сайт: https://fatkullinar-eng.github.io/razgruzka-site/
+- Репозиторий: https://github.com/fatkullinar-eng/razgruzka-site
+- Хостинг: GitHub Pages, ветка `main`, папка `/`.
+
 ## Быстрый старт
 
 ```powershell
@@ -41,5 +47,5 @@ node tmp/serve-massage.js
 ## Важно
 
 - В код вставляется только `anon public` key. `service_role` не использовать.
-- Перед публикацией замените `razgruzka-msk.ru` на реальный домен в `index.html`, `robots.txt`, `sitemap.xml`.
+- Сайт уже опубликован на GitHub Pages: `https://fatkullinar-eng.github.io/razgruzka-site/`. Если позже подключите свой домен, замените адрес в `index.html`, `robots.txt`, `sitemap.xml`.
 - Замените примерные данные: телефон `+7 (999) 123-45-67`, адрес, ИНН `770000000000`, имя мастера. Они вымышленные и нужны только для демонстрации.
