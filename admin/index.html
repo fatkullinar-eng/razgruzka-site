@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Личный кабинет — «Разгрузка»</title>
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#1F3A31">
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/css/styles.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ВХОД -->
+  <main class="login" id="loginView">
+    <div class="login__visual">
+      <a class="brand login__brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true">60</span>
+        <span class="brand__text">
+          <strong>Разгрузка</strong>
+          <small>массаж шеи и спины · Москва</small>
+        </span>
+      </a>
+
+      <div class="login__quote">
+        <p>«60 минут — это 60 минут рук на теле».</p>
+        <span>Личный кабинет владельца</span>
+      </div>
+
+      <a class="login__back" href="../index.html">← Вернуться на сайт</a>
+      <span class="login__ghost" aria-hidden="true">60</span>
+    </div>
+
+    <div class="login__panel">
+      <form class="login__form" id="loginForm">
+        <p class="eyebrow">Личный кабинет</p>
+        <h1>Вход для владельца</h1>
+        <p class="login__lead">Здесь вы меняете тексты, загружаете фото и смотрите заявки. Ничего устанавливать не нужно.</p>
+
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input id="email" name="email" type="email" autocomplete="username" placeholder="you@example.ru" required>
+        </div>
+
+        <div class="field">
+          <label for="password">Пароль</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required>
+        </div>
+
+        <button class="btn btn--primary btn--wide" type="submit" id="loginBtn">Войти</button>
+        <p class="form-status" id="loginStatus" role="status" aria-live="polite"></p>
+
+        <p class="demo-note" id="demoNote" hidden>
+          <strong>Демо-режим.</strong> Supabase ещё не подключён. Войти можно с любым e-mail и паролем — изменения сохранятся только в этом браузере. Так можно всё потрогать до создания аккаунта.
+        </p>
+
+        <p class="login__hint">Забыли пароль — напишите администратору сайта. Пароль хранится в Supabase, не в коде.</p>
+      </form>
+    </div>
+  </main>
+
+  <!-- КАБИНЕТ -->
+  <section class="app" id="appView" hidden>
+    <header class="admin-bar">
+      <a class="brand" href="../index.html">
+        <span class="brand__mark" aria-hidden="true">60</span>
+        <span class="brand__text">
+          <strong>Разгрузка</strong>
+          <small>личный кабинет</small>
+        </span>
+      </a>
+
+      <div class="admin-bar__actions">
+        <span class="admin-bar__user" id="userEmail"></span>
+        <a class="admin-bar__link" href="../index.html" target="_blank" rel="noopener">Открыть сайт ↗</a>
+        <button class="btn btn--ghost btn--sm" type="button" id="logoutBtn">Выйти</button>
+      </div>
+    </header>
+
+    <div class="admin-wrap">
+      <div class="admin-head">
+        <div>
+          <p class="eyebrow">Управление сайтом</p>
+          <h1>Личный кабинет</h1>
+        </div>
+        <span class="admin-mode" id="modeBadge" hidden>Демо-режим</span>
+      </div>
+
+      <nav class="admin-tabs" role="tablist" aria-label="Разделы кабинета">
+        <button class="admin-tab is-active" type="button" data-tab="content" role="tab" aria-selected="true">Контент</button>
+        <button class="admin-tab" type="button" data-tab="gallery" role="tab" aria-selected="false">Галерея</button>
+        <button class="admin-tab" type="button" data-tab="bookings" role="tab" aria-selected="false">Заявки <span class="count" id="bookingsCount">0</span></button>
+      </nav>
+
+      <!-- КОНТЕНТ -->
+      <section class="admin-panel" data-panel="content">
+        <form id="contentForm" class="content-form" novalidate>
+          <div class="panel-head">
+            <div>
+              <h2>Тексты и контакты</h2>
+              <p>Изменения появятся на сайте сразу после сохранения. H1 не редактируется — он закреплён за поиском.</p>
+            </div>
+            <button class="btn btn--primary" type="submit">Сохранить</button>
+          </div>
+
+          <fieldset class="form-group">
+            <legend>Первый экран</legend>
+            <div class="field field--full">
+              <label for="hero_h2">Подзаголовок под H1</label>
+              <textarea id="hero_h2" data-key="hero_h2" rows="3"></textarea>
+              <small>Если меняете цену первого визита, поправьте её и в этом тексте.</small>
+            </div>
+            <div class="field field--full">
+              <label for="free_slots">Свободные окна на этой неделе</label>
+              <textarea id="free_slots" data-key="free_slots" rows="2"></textarea>
+              <small>Обновляйте каждую неделю — это блок срочности на первом экране и в оффере.</small>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-group">
+            <legend>Цены</legend>
+            <div class="field">
+              <label for="first_visit_price">Первый визит, ₽</label>
+              <input id="first_visit_price" data-key="first_visit_price" inputmode="numeric">
+            </div>
+            <div class="field">
+              <label for="trial_price">Пробный сеанс, ₽</label>
+              <input id="trial_price" data-key="trial_price" inputmode="numeric">
+            </div>
+            <div class="field">
+              <label for="price_30">30 минут, ₽</label>
+              <input id="price_30" data-key="price_30" inputmode="numeric">
+            </div>
+            <div class="field">
+              <label for="price_60">60 минут, ₽</label>
+              <input id="price_60" data-key="price_60" inputmode="numeric">
+            </div>
+            <div class="field">
+              <label for="price_90">90 минут, ₽</label>
+              <input id="price_90" data-key="price_90" inputmode="numeric">
+            </div>
+          </fieldset>
+
+          <fieldset class="form-group">
+            <legend>Мастер</legend>
+            <div class="field">
+              <label for="master_name">Имя</label>
+              <input id="master_name" data-key="master_name">
+            </div>
+            <div class="field">
+              <label for="master_role">Специализация</label>
+              <input id="master_role" data-key="master_role">
+            </div>
+            <div class="field">
+              <label for="master_experience">Опыт</label>
+              <input id="master_experience" data-key="master_experience" placeholder="Например: 7 лет практики">
+            </div>
+            <div class="field">
+              <label for="master_education">Образование</label>
+              <input id="master_education" data-key="master_education" placeholder="Например: медицинское, массаж">
+            </div>
+
+            <div class="field field--full">
+              <label>Фото мастера</label>
+              <div class="master-upload">
+                <div class="master-upload__preview" id="masterPhotoPreview"><span>Нет фото</span></div>
+                <div class="master-upload__actions">
+                  <input id="masterPhotoInput" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+                  <label class="btn btn--ghost btn--sm" for="masterPhotoInput">Выбрать фото</label>
+                  <button class="btn btn--primary btn--sm" type="button" id="masterPhotoSave">Загрузить фото мастера</button>
+                  <button class="btn btn--ghost btn--sm" type="button" id="masterPhotoRemove">Удалить фото</button>
+                  <p class="form-status" id="masterPhotoStatus" role="status" aria-live="polite"></p>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-group">
+            <legend>Контакты</legend>
+            <div class="field">
+              <label for="phone_display">Телефон на сайте</label>
+              <input id="phone_display" data-key="phone_display" placeholder="+7 (900) 123-45-67">
+            </div>
+            <div class="field">
+              <label for="phone_link">Телефон для звонка</label>
+              <input id="phone_link" data-key="phone_link" placeholder="+79001234567">
+              <small>Только цифры и плюс — по этой ссылке работает кнопка «позвонить».</small>
+            </div>
+            <div class="field">
+              <label for="whatsapp_link">WhatsApp</label>
+              <input id="whatsapp_link" data-key="whatsapp_link" placeholder="https://wa.me/79001234567">
+            </div>
+            <div class="field">
+              <label for="telegram_link">Telegram</label>
+              <input id="telegram_link" data-key="telegram_link" placeholder="https://t.me/username">
+            </div>
+            <div class="field">
+              <label for="address">Адрес</label>
+              <input id="address" data-key="address" placeholder="Улица, дом">
+            </div>
+            <div class="field">
+              <label for="metro">Метро</label>
+              <input id="metro" data-key="metro" placeholder="Название станции">
+            </div>
+            <div class="field field--full">
+              <label for="hours">Часы работы</label>
+              <input id="hours" data-key="hours" placeholder="Ежедневно 10:00–22:00">
+            </div>
+          </fieldset>
+
+          <fieldset class="form-group">
+            <legend>Реквизиты для политики конфиденциальности</legend>
+            <div class="field">
+              <label for="legal_name">ИП / ООО</label>
+              <input id="legal_name" data-key="legal_name" placeholder="ИП Иванов И. И.">
+            </div>
+            <div class="field">
+              <label for="legal_inn">ИНН</label>
+              <input id="legal_inn" data-key="legal_inn" placeholder="000000000000">
+            </div>
+          </fieldset>
+
+          <div class="content-form__footer">
+            <button class="btn btn--primary" type="submit">Сохранить изменения</button>
+            <p class="form-status" id="contentStatus" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </section>
+
+      <!-- ГАЛЕРЕЯ -->
+      <section class="admin-panel" data-panel="gallery" hidden>
+        <div class="panel-head">
+          <div>
+            <h2>Фотографии</h2>
+            <p>Загружайте фото кабинета, кушетки, деталей. Порядок на сайте можно менять стрелками. Удаление — с подтверждением.</p>
+          </div>
+        </div>
+
+        <form id="uploadForm" class="upload" novalidate>
+          <div class="upload__left">
+            <label class="upload__label" for="photoInput">
+              <strong>Выбрать фото</strong>
+              <span>JPG, PNG или WebP до 5 МБ</span>
+            </label>
+            <input id="photoInput" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+            <div class="upload__preview" id="uploadPreview"><span>Предпросмотр</span></div>
+          </div>
+
+          <div class="upload__fields">
+            <div class="field">
+              <label for="photoTitle">Подпись на сайте</label>
+              <input id="photoTitle" placeholder="Например: кабинет">
+            </div>
+            <div class="field">
+              <label for="photoAlt">Описание для поиска (alt)</label>
+              <input id="photoAlt" placeholder="Например: массажная кушетка у окна">
+            </div>
+            <button class="btn btn--primary" type="submit">Загрузить фото</button>
+            <p class="form-status" id="uploadStatus" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+
+        <div class="admin-gallery" id="adminGallery"></div>
+        <p class="empty" id="galleryEmpty" hidden>Пока нет фотографий. Загрузите первое фото — оно сразу появится на сайте.</p>
+      </section>
+
+      <!-- ЗАЯВКИ -->
+      <section class="admin-panel" data-panel="bookings" hidden>
+        <div class="panel-head">
+          <div>
+            <h2>Заявки с сайта</h2>
+            <p>Новые заявки сверху. Позвоните, отметьте «обработана» и удалите, когда запись закрыта.</p>
+          </div>
+          <button class="btn btn--ghost btn--sm" type="button" id="exportCsv">Выгрузить в CSV</button>
+        </div>
+
+        <div class="bookings" id="bookingsList"></div>
+        <p class="empty" id="bookingsEmpty" hidden>Пока заявок нет. Как только кто-то отправит форму на сайте, она появится здесь.</p>
+      </section>
+    </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../assets/js/config.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

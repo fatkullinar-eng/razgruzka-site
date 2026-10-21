@@ -1,0 +1,12 @@
+# Исходники фото — тяжёлые, для сайта не нужны.
+# Оптимизированные копии лежат в assets/img/site/ и попадают в репозиторий.
+assets/img/photos/*
+!assets/img/photos/README.md
+
+# Служебные файлы Windows и macOS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# Логи
+*.log
