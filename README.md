@@ -2,6 +2,12 @@
 
 Одностраничный сайт и личный кабинет владельца.
 
+## Скриншоты
+
+| Компьютер | Телефон |
+| --- | --- |
+| ![Компьютерная версия](screenshots/01-desktop.png) | ![Телефонная версия](screenshots/02-mobile.png) |
+
 ## Публикация
 
 - Сайт: https://fatkullinar-eng.github.io/razgruzka-site/
